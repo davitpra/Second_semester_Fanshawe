@@ -1,0 +1,75 @@
+﻿<html>
+	<head>
+		<title>Page Title Here</title>
+		<style type="text/css">
+			body {
+				background-color:lightblue;
+			}
+
+			.TxtBox {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 8pt;
+				color: black;
+				height: 19px;
+				background-color: white;
+				border: 1px solid #07A2FE;
+			}
+			.BtnButton {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 8pt;
+				color: black;
+				height: 24px;
+				cursor: pointer;
+			}
+		</style>
+		<script language="JavaScript" type="text/JavaScript">
+			function getSentence() {
+				var text = document.getElementById("txtString").value;
+				var words = text.split(" ");
+				var colours = ["red", "brown", "gold"]; // array literal
+				
+				processSentence(words, colours);
+			}
+		
+			function processSentence(words, colours) {
+				var countColours = [];
+				
+				for (var i = 0; i < colours.length; i++) {
+					countColours[i] = 0;
+				}
+				
+				for (var i = 0; i < words.length; i++) {
+					for (var j = 0; j < colours.length; j++) {
+						if (words[i] === colours[j]) {
+							countColours[j]++;
+						}
+					}
+				}
+				
+				for (var i = 0; i < colours.length; i++) {
+					document.getElementById("outputStuff").innerHTML += colours[i] + " = " + countColours[i] + " ";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Enter a Sentence</div>
+		<input type="text" id="txtString" class="TxtBox" style="width:400px" value="The quick red fox jumped over the gold dog's back" />
+		<br /><br />
+		<input type="button" id="btnProcess" class="BtnButton" onclick="getSentence();" value="Process Sentence"/>
+		<br /><br />
+		<div id="outputStuff"></div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

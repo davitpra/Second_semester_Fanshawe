@@ -1,0 +1,70 @@
+﻿<html>
+	<head>
+		<title>Practice 2</title>
+		<style type="text/css">
+			body {
+				background-color:ButtonFace;
+			}
+
+			.TxtBox {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 8pt;
+				color: black;
+				height: 19px;
+				background-color: white;
+				border: 1px solid #07A2FE;
+			}
+			.BtnButton {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 8pt;
+				color: black;
+				height: 24px;
+				cursor: pointer;
+			}
+		</style>
+		<script language="JavaScript" type="text/JavaScript">
+			function addWords() {
+				var txt1 = document.getElementById("txtBox1").value;
+				var txt2 = document.getElementById("txtBox2").value;
+				var txt3 = txt1 + " " + txt2;
+				document.getElementById("txtBox3").value = txt3;
+				//document.getElementById("txtBox3").value = document.getElementById("txtBox1").value + " " + document.getElementById("txtBox2").value // ... more efficient
+				document.getElementById("txtBox3").style.backgroundColor = "red";
+				document.getElementById("txtBox3").style.color = "white";
+			}
+			
+			function clearWords() {
+				document.getElementById("txtBox1").value = "";
+				document.getElementById("txtBox2").value = "";
+				document.getElementById("txtBox3").value = "";
+				document.getElementById("txtBox3").style.backgroundColor = "white";
+				document.getElementById("txtBox3").style.color = "black";
+			}
+		</script>
+	</head>
+	<body>
+		<div>Textbox #1</div>
+		<input type="text" id="txtBox1" class="TxtBox" style="width:200px" value="The quick brown fox" />
+		<br /><br />
+		<div>Textbox #2</div>
+		<input type="text" id="txtBox2" class="TxtBox" style="width:200px" value="jumped over the lazy dog's back" />
+		<br /><br />
+		<div>Textbox #3</div>
+		<input type="text" id="txtBox3" class="TxtBox" style="width:400px" value="" />
+		<br /><br />
+		<input type="button" id="btnAdd" class="BtnButton" onclick="addWords();" value="Add"/>
+		<br /><br />
+		<input type="button" id="btnClear" class="BtnButton" onclick="clearWords();" value="Clear"/>
+		<br /><br />
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+

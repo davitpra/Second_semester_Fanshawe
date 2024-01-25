@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script language="JavaScript" type="text/JavaScript">
+      // global variable for total revenue
+      let totRevenue = 0;
+
+      // constructor function for videoType
+       function videoType({
+         title,
+         category,
+         cast = [],
+         price,
+         numRents = 0,
+         vidRevenue = 0.0,
+       }) {
+        // properties
+         this.title = title;
+         this.category = category;
+         this.cast = cast;
+         this.price = price;
+         this.numRents = numRents;
+         this.vidRevenue = vidRevenue;
+
+        // method for processing a rental
+         this.procRental = function () {
+           this.numRents++;
+           this.vidRevenue = this.price * this.numRents;
+            totRevenue += this.price;
+         };
+       }
+
+        // function to start the program
+       function startMeUp() {
+        // array to store videoType objects
+         let videos = [];
+
+         // initial values of videos
+         var video1 = new videoType({
+           title: "Rogue One",
+           category: "SciFi",
+           cast: ["Felicity Jones", "Mads Mikkelsen", "Riz Ahmed"],
+           price: 17.95,
+         });
+
+         var video2 = new videoType({
+           title: "Arrival",
+           category: "SciFi",
+           cast: ["Amy Adams", "Jeremy Renner"],
+           price: 17.95,
+         });
+
+         var video3 = new videoType({
+           title: "No Time to Die",
+           category: "Adventure",
+           cast: ["Daniel Craig", "Léa Seydoux", "Rami Malek", "Lashana   Lynch"],
+           price: 28.95,
+         });
+
+         // add videos to array
+         videos.push(video1);
+         videos.push(video2);
+         videos.push(video3);
+
+         // simulate rentals as in step 11
+         for (var i = 0; i < 5; i++) {
+             for (var j = 0; j < videos.length; j++) {
+                 videos[j].procRental();
+             }
+         }
+
+         // display results
+         var output = document.getElementById("output");
+
+         videos.map(video => {
+            const videoContainer = document.createElement("section");
+            videoContainer.innerHTML = `<p> ${video.title}, ${video.category}, $${video.price}, ${video.numRents}, $${video.vidRevenue} </p>`;
+            video.cast.map(cast => {
+                const castContainer = document.createElement("p");
+                castContainer.innerHTML = `${cast}`;
+                videoContainer.appendChild(castContainer);
+            });
+            videoContainer.appendChild(document.createElement("br"));
+            output.appendChild(videoContainer);
+         });
+
+         output.innerHTML += `<p>Total Revenue: $${totRevenue.toFixed(2)}</p>`;
+      }
+    </script>
+    <title>Lab 1 - JavaScript</title>
+  </head>
+  <body onload="startMeUp()">
+    <div id="output"></div>
+  </body>
+</html>

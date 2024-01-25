@@ -1,0 +1,39 @@
+﻿<html>
+	<head>
+		<title>Coin Toss</title>
+		<script language="JavaScript" type="text/JavaScript">
+			function startTossing() {
+				var countHeads = 0;
+				var countTails = 0;
+			
+				var numToss = document.getElementById("txtNumToss").value;
+				numToss = parseInt(numToss);
+				
+				var tossArray = [];
+			
+				for (var i = 0; i < numToss; i++) {
+					var toss = Math.floor(Math.random() * 2);
+					//tossArray[i] = toss; // this approach also works
+					tossArray.push(toss);
+				}
+				
+				for (var i = 0; i < numToss; i++) {
+					if (tossArray[i] === 0) {
+						countHeads++;
+					}
+					else {
+						countTails++;
+					}
+				}
+				
+				alert("Number of heads = " + countHeads + " and number of tails = " + countTails);
+			}
+		</script>
+	</head>
+	<body>
+		<div>Number of Tosses</div>
+		<input type="text" id="txtNumToss" maxlength="20" size="20" value="10" />
+		<br /><br />
+		<input type="button" onclick="startTossing();" value="Start Tossing"/>
+	</body>
+</html>

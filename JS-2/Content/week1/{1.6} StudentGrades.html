@@ -1,0 +1,54 @@
+﻿<html>
+  <head>
+    <title>Student Grades</title>
+    <script language="JavaScript" type="text/JavaScript">
+      function startMeUp() {
+      	var text = "";
+      	var students = ["Peter", "Mike", "Mary", "Sarah", "Jen"];
+      	var courses = ["INFO1232", "INFO1135", "INFO1120", "INFO1178"];
+      	var grades = [];
+
+      	for (var i = 0; i < students.length; i++) {
+      		grades[i] = [];
+      		for (var j = 0; j < courses.length; j++) {
+      			grades[i][j] = Math.floor(Math.random() * 100);
+      		}
+      	}
+
+      	text += tab(10);
+      	for (var j = 0; j < courses.length; j++) {
+      		text += courses[j] + tab(2);
+      	}
+      	text += "<br>";
+
+      	for (var i = 0; i < students.length; i++) {
+      		text += students[i] + tab(10 - students[i].length);
+      		for (var j = 0; j < courses.length; j++) {
+      			var grade = grades[i][j];
+      			if (grade < 10) {
+      				grade = "0" + grade;
+      			}
+
+      			text += grade + tab(8);
+      		}
+      		text += "<br>";
+      	}
+
+      	document.getElementById("outputStuff").innerHTML = text;
+
+      }
+
+      function tab(num) {
+      	var spaces = "";
+      	for (var i = 0; i < num; i++) {
+      		spaces += "&nbsp;";
+      	}
+
+      	return spaces;
+      }
+    </script>
+  </head>
+  <body onload="startMeUp();">
+    <div id="output"></div>
+  </body>
+</html>
