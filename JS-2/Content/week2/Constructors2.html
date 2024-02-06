@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Constructors (Array of Objects)</title>
+    <script>
+        // this is a constructor function used to create a new object
+		// based on the parameters passed over
+        function PlanType(name, price, space, transfer, pages) {
+		
+			// "this" references the current object being created
+			// to ensure that each object has its own private data
+            this.name = name;
+            this.price = price;
+            this.space = space;
+            this.transfer = transfer; 
+            this.pages = pages;
+        }
+
+		// prints out an array of objects using document.write
+        function printObjArray(pArray) {
+            var properties = "";
+
+			// use a "for" loop to combine all the properties into a string
+			// separate each property from the next with a space
+            for (var i = 0; i < pArray.length; i++) {
+                properties += pArray[i].name + " ";
+				properties += pArray[i].price + " ";
+				properties += pArray[i].space + " ";
+				properties += pArray[i].transfer + " ";
+				properties += pArray[i].pages + "<br>";
+			}
+
+            document.write(properties); // print out the "properties" string with all object properties
+        }
+		
+		// start up function launched from the onload event
+		function startMeUp() {
+			var plans = []; // create an empty array
+
+			// creates an object array with 3 element objects (plans[0], plans[1] and plans[2])
+			plans[0] = new PlanType("Basic", 3.99, 100, 1000, 10);
+			plans[1] = new PlanType("Premium", 5.99, 500, 5000, 50);
+			plans[2] = new PlanType("Ultimate", 9.99, 2000, 20000, 500);
+			
+			// print out all objects in the plans array
+			printObjArray(plans);
+		}
+		
+    </script>
+</head>
+<body onload="startMeUp();">
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Simple Object Example</title>
+		<script language="JavaScript" type="text/JavaScript">
+		
+			var flight = {
+				airline: "Oceanic",
+				number: 815,
+				departure: {
+					IATA: "SYD",
+					time: "2004-09-22 14:55",
+					city: "Sydney"
+				},
+				arrival: {
+					IATA: "LAX",
+					time: "2004-09-23 10:42",
+					city: "Los Angeles"
+				},
+				updateNumber: function(num) {
+					this.number = num;
+				},
+				updateDepartures: function(IATA, time, city) {
+					this.departure.IATA = IATA;
+					this.departure.time = time;
+					this.departure.city = city;
+				}
+			}
+			
+			function startMeUp() {
+				flight.updateNumber(900);
+				flight.updateDepartures("TOR", "2018-02-01 08:44", "Toronto");
+				document.write(flight.departure.time);
+			}
+		</script>
+	</head>
+	<body onload="startMeUp();">
+	
+	</body>
+</html>

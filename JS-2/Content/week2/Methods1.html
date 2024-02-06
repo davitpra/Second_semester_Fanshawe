@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Methods</title>
+    <script>
+        var PlanType = function(name, price, space, transfer, pages, discountMonths) {
+            this.name = name;
+            this.price = price;
+            this.space = space;
+            this.transfer = transfer;
+            this.pages = pages;
+            this.discountMonths = discountMonths;
+
+            this.calcAnnual = function(percentIfDiscount) {
+                var bestPrice = this.price;
+                var currentDate = new Date();
+                var theMo = currentDate.getMonth();
+
+                for (var i = 0; i < this.discountMonths.length; i++) {
+                    if (this.discountMonths[i] === theMo) {
+                        bestPrice = this.price * percentIfDiscount;
+                        break;
+                    }
+                }
+                return bestPrice * 12;
+            }
+        }
+
+        var plan1 = new PlanType("Basic", 3.99, 100, 1000, 10, [2, 6, 7]);
+        var plan2 = new PlanType("Premium", 6.99, 500, 5000, 20, [1, 6, 7, 9]);
+        var bp = plan1.calcAnnual(0.15);
+		
+		bp = plan2.calcAnnual(0.15);
+
+        if (sameDiscountMonths(plan1, plan2)) {
+            document.write(plan1.name + " and " + plan2.name + " have the same discount months");
+        }
+        else {
+            document.write(plan1.name + " and " + plan2.name + " don't have the same discount months");
+        }
+
+        // return true/false
+        function sameDiscountMonths(p1, p2) {
+            if (p1.discountMonths.length !== p2.discountMonths.length)
+                return false;
+
+            for (var i = 0; i < p1.discountMonths.length; i++) {
+                if (p1.discountMonths[i] !== p2.discountMonths[i])
+                    return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

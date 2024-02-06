@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Constructors</title>
+    <script>
+        // this is a constructor function used to create a new object
+		// based on the parameters passed over
+        function PlanType(name, price, space, transfer, pages) {
+		
+			// "this" references the current object being created
+			// to ensure that each object has its own private data
+            this.name = name;
+            this.price = price;
+            this.space = space;
+            this.transfer = transfer; 
+            this.pages = pages;
+        }
+
+        // prints out a single object using document.write
+        function printObj(pObj) {
+            document.write(pObj.name + " " + pObj.price + " " + pObj.space + " " + pObj.transfer + " " + pObj.pages + "<br>");
+        }
+
+		// start up function launched from the onload event
+		function startMeUp() {
+			// creates 3 objects (plan1, plan2 and plan3)
+			var plan1 = new PlanType("Basic", 3.99, 100, 1000, 10);
+			var plan2 = new PlanType("Premium", 5.99, 500, 5000, 50);
+			var plan3 = new PlanType("Ultimate", 9.99, 2000, 20000, 500);
+
+			// print out each object
+			printObj(plan1);
+			printObj(plan2);
+			printObj(plan3);
+		}
+		
+    </script>
+</head>
+<body onload="startMeUp();">
+
+</body>
+</html>
