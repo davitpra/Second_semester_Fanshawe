@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>Wikipedia Demo 1</title>
+		<style type="text/css">
+			body {
+				background-color:ButtonFace;
+			}
+			.txtBox {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 9pt;
+				color: black;
+				height: 19px;
+				background-color: white;
+				border: 1px solid #07A2FE;
+			}
+			.divClass {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 9pt;
+				padding: 3px;
+				color: black;
+				background-color: white;
+				width: 500px;
+				border: 1px solid #07A2FE;
+				visibility: hidden;
+			}
+			.btnButton {
+				font-family: Verdana, Arial, Helvetica;
+				font-size: 8pt;
+				color: black;
+				height: 24px;
+				cursor: pointer;
+			}
+		</style>
+		<script language="JavaScript" type="text/JavaScript">
+			const ISOK = 200;
+			var request = new XMLHttpRequest();
+		
+			function getJSONAsync(searchArg) {
+				if (searchArg == "") {
+					alert("Enter valid search argument");
+					return;
+				}
+			
+				// use a named function as the event handler
+				request.onload = callBack;
+				var url = "https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=" + searchArg;
+				request.open("GET", url, true);
+				request.send();
+			}
+			
+			function callBack() {
+				if (request.status === ISOK) {
+					var jsObject = JSON.parse(request.responseText);
+					var countResults = jsObject.query.search.length;
+					var template = '<a href="_url" target="_blank">_title</a><br><br>';
+					
+					// clear div container
+					document.getElementById("outputDiv").innerHTML = "";
+					
+					if (countResults > 0) {
+						for (var i = 0; i < countResults; i++) {
+							var link = "https://en.wikipedia.org/?curid=" + jsObject.query.search[i].pageid;
+							var titleText = template.replace("_url", link);
+							titleText = i + 1 + ". " + titleText.replace("_title", jsObject.query.search[i].title);
+							document.getElementById("outputDiv").innerHTML += titleText;
+							
+							var snipText = jsObject.query.search[i].snippet + "...<br><br>";
+							document.getElementById("outputDiv").innerHTML += snipText;
+							document.getElementById("outputDiv").style.visibility = "visible";
+						}
+					}
+				}
+			}
+		
+			function doSearch() {
+				var searchArg = document.getElementById("txtSearch").value;
+				getJSONAsync(searchArg);
+				
+			}
+			
+			function filterText() {
+				if (window.event.keyCode === 13) {
+					document.getElementById("outputDiv").style.visibility = "hidden";
+					doSearch();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="txtSearch" class="txtBox" style="width:200px" onclick="this.select();" onkeypress="filterText();" value="supercomputer" />
+		<br /><br />
+		<input type="button" id="btnAsynch" class="btnButton" value="Find Data Asynchronously" onclick="doSearch();" />
+		<br /><br />
+		<div id="outputDiv" class="divClass"></div><br />
+	</body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>Wikipedia Demo 3 (external .js and .css)</title>
+		<link rel="stylesheet" href="wikidemo3.css" />
+		<script src="wikidemo3.js"></script>
+	</head>
+	<body>
+		<input type="text" id="txtSearch" class="txtBox" style="width:200px" onclick="this.select();" onkeypress="filterText();" value="supercomputer" />
+		<br /><br />
+		<input type="button" id="btnAsynch" class="btnButton" value="Find Data Asynchronously" onclick="doSearch();" />
+		<br /><br />
+		<div id="outputDiv" class="divClass"></div><br />
+	</body>
+</html>

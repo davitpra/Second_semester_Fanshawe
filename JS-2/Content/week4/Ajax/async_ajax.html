@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>ASynchronous AJAX</title>
+  </head>
+  <body onload="main();">
+    <script type="text/JavaScript">
+      // Create a new XMLHttpRequest object
+      let xmlHttp = new XMLHttpRequest();
+
+      function requestCallbackFunction(){
+          // Check if the request is complete and was successful
+          if(xmlHttp.status === 200){
+              // Get the response data as a string
+              var text = xmlHttp.responseText;
+
+              writeToContent(text);
+              // Parse the data to a JSON.
+              let data = JSON.parse(text);
+              console.log(data);
+
+              // Set a timeout to demonstrate the asynchronous nature of the request
+              setTimeout(null, 1000);
+
+              // Add a new property to the JSON object
+              data['someProperty'] = { data:"This is an additional value"};
+
+              console.log(JSON.stringify(data));
+          }
+      }
+
+      function getJSONASynchronous(url){
+          if(xmlHttp !== null){
+              // Set the callback function
+              xmlHttp.onload = requestCallbackFunction;
+              // Open the request
+              xmlHttp.open("GET", url, true);// true makes the request asynchronous
+              // Send the request
+              xmlHttp.send(null);
+          }
+      }
+
+      function writeToContent(data){
+          document.getElementById("content").innerText = data;
+      }
+
+      function main(){
+          getJSONASynchronous("https://google.ca");
+          getJSONASynchronous("https://reqbin.com/echo/get/json");
+          getJSONASynchronous("./data.json");
+      }
+    </script>
+
+    <div id="content"></div>
+  </body>
+</html>

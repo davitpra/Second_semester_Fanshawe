@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Synchronous AJAX</title>
+  </head>
+  <body onload="main();">
+    <script type="text/JavaScript">
+
+      function getJSONSynchronous(url){
+          let response = "";
+          // Create a new XMLHttpRequest object
+          let xmlHttp = new XMLHttpRequest();
+
+          if(xmlHttp !== null){
+              // configuration of the request
+              xmlHttp.open("GET", url, false); // false makes the request synchronous
+              // Send the request
+              xmlHttp.send(null);
+
+              response = xmlHttp.responseText;
+
+              return response;
+          }
+      }
+
+      function writeToContent(data){
+          document.getElementById("content").innerText = data;
+      }
+
+      function main(){
+          writeToContent(getJSONSynchronous("https://google.ca"));
+          writeToContent(getJSONSynchronous("https://reqbin.com/echo/get/json"));
+          writeToContent(getJSONSynchronous("./data.json"));
+      }
+    </script>
+
+    <div id="content"></div>
+  </body>
+</html>
