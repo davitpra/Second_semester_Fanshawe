@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script>
+		// event handler will be called when the user clicks the button
+		function startProcessing() {
+			
+			// "flag" variable is used to determine when loop will stop
+			// "dummy" and "count" are used to simulate processing work
+			var done = false;
+			var count = 0;
+			
+			// the inner function is used to simulate the "while" loop
+			// found in UIDemo1
+			function innerLoop() {
+				
+				// the same logic found in the while loop
+				// is now located in the function
+				count++;
+				
+				// notice that the text boxes are now being updated
+				// and it's also possible to type characters into
+				// a text box
+				document.getElementById("txtBox1").value = count;
+				document.getElementById("txtBox2").value = count;
+				
+				// why does this work?
+				// we're able to use the "setTimeout" to recursively call
+				// innerLoop every 5 milliseconds
+				// while the JavaScript system is waiting the 5 ms, it will
+				// process all UI events
+				
+				if (count > 10000) {
+					done = true;
+				}
+				
+				if (!done)
+					setTimeout(innerLoop, 5);
+			}
+			
+			// this starts the "loop" running by
+			// calling innerLoop the first time
+			innerLoop();
+        }
+    </script>
+</head>
+<body>
+    <a>Text box #1:</a><br />
+	<input type="text" id="txtBox1" maxlength="40" size="40"/>
+	<br /><br />
+	
+	<a>Text box #2:</a><br />
+	<input type="text" id="txtBox2" maxlength="40" size="40"/>
+	<br /><br />
+	
+	<a>Text box #3:</a><br />
+	<input type="text" id="txtBox3" maxlength="40" size="40"/>
+	<br /><br />
+	
+	<input type="button" id="btnStart"  value="Start Processing" onclick="startProcessing();" />
+</body>
+</html>
