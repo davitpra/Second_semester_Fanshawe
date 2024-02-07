@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lab 5 - David Prado</title>
+  </head>
+  <body>
+    <h1>Movie Theatre Survey</h1>
+    <form action="./submit.php" method="post">
+      <label for="firstName">Enter your first name:</label>
+      <input name="firstName" id="firstName" type="text" />
+      <br />
+      <label for="lastName">Enter your last name:</label>
+      <input name="lastName" id="lastName" type="text" />
+      <br />
+      <label for="movieName">Enter your favourite movie name:</label>
+      <input name="movieName" id="movieName" type="text" />
+      <br />
+      <label for="movieSnack">Enter your favourite movie snack:</label>
+      <input name="movieSnack" id="movieSnack" type="text" />
+      <br />
+      <label for="theater">Theatre Seat Row Preference:</label>
+      <select name="theater">
+        <option value="Back">Back</option>
+        <option value="Middle">Middle</option>
+        <option value="Front">Front</option>
+      </select>
+      <br />
+      <label for="generalFeedback">General Feedback:</label>
+      <textarea name="generalFeedback" id="generalFeedback"></textarea>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
