@@ -1,0 +1,8 @@
+If you chose 1 and enter the forest:
+You enter the forest and feel a sense of adventure within you! As you walk, you stumble upon a clearing where you discover a magical treasure! You quickly gather your riches and promptly leave the forest.
+
+If you chose 2 and turn back:
+You decide to turn back and head home. Perhaps another day you'll explore the mysterious forest.
+
+If you chose 3 and think about it:
+You spent so long thinking that a cougar suddenly appeared and ate you.
