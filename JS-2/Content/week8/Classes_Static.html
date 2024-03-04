@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Rectangle Class</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// declare a Rectangle class
+			class Rectangle {
+				constructor (width, height) {
+					this._width  = width;
+					this._height = height;
+				}
+				// create native getters and setters
+				set width(width){
+					this._width = width;
+				}
+				
+				get width(){
+					return this._width;
+				}
+				
+				set height(height){
+					this._height = height;
+				}
+				
+				get height(){
+					return this._height;
+				}
+				
+				get area(){
+					return this._width * this._height;
+				}
+				
+				// create a static method that we can call without
+				// first creating an object
+				static defaultRectangle () {
+					return new Rectangle(100, 100);
+				}
+			}
+			var r = new Rectangle(50, 20)
+			
+			r.width = 60;
+			
+			if (r.area === 1000) {
+				console.log(true);
+			}
+			else {
+				console.log(false);
+			}
+			
+			// call the static method directly
+			var defaultRect = Rectangle.defaultRectangle();
+			console.log(defaultRect.area);
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

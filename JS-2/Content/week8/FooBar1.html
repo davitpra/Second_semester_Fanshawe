@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Foo Bar 1</title>
+	<meta charset="utf-8" />
+    <script>
+		"use strict" 
+        var foo = "Bill";
+
+        bar();
+        baz(foo);
+
+		// function literal
+        function bar() {
+            var foo = "Tony";
+			
+			innerFunc();
+			
+			function innerFunc() {
+				var foo = "Jimbo";
+			}
+        }
+
+        function baz(foo) {
+            foo = "Garth";
+            bam = "Jim";
+        }
+		
+		//func(foo);
+
+		// function expression
+        var func = function (foo) {
+            foo = "Lianne";
+            bam = "Mike";
+        }
+
+        func(foo);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

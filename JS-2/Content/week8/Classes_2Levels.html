@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<title>Classes</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// create the "base" class
+			class Book {
+				// define the constructor function for Book
+				// notice the use of ._propertyName
+				constructor(title, author, pubdate) {
+				   this._title = title;
+				   this._author = author;
+				   this._pubdate = pubdate;
+				}
+				// create a method
+				// this is much easier to do with ES6
+				getBook() {
+				   return this._author + " published " + this._title + " in " + this._pubdate;
+				}
+			}
+
+			// create a new class that extends the base class book
+			class TypedBook extends Book {
+				// define the constructor function for TypeBook
+				// include a reference to the "base" class Book
+				// to call that constructor function as well...
+				// this done using "super([parameter set for the base class])
+				constructor(title, author, pubdate, type) {
+					super(title, author, pubdate);
+					this._type = type;
+				}
+				
+				// this method overrides the getBook() found in the base class
+				// but allows us to call the Book version with super.getBook()
+				getBook() {
+				   return super.getBook() + " - category: " + this._type;
+				}
+
+				// we can use an ES6 getter to retrieve the type
+				get type() {
+				   return this._type;
+				}
+				
+				// ... and an ES6 setter to set a new value for type
+				set type(newType) {
+					if (newType) {
+						this._type = newType;
+					}
+				}
+			}
+			
+			// create a new class that extends the base class book
+			// very similar to the TypedBook class but with version instead
+			class VersionBook extends Book {
+				constructor(title, author, pubdate, version) {
+					super(title, author, pubdate);
+					this._version = version;
+				}
+				
+				getBook() {
+				   return super.getBook() + " - version: " + this._version;
+				}
+
+				get version() {
+				   return this._version;
+				}
+			}
+			
+			// create a new class that extends VersionBook
+			// this creates a 3 level hierarchy because VersionBook
+			// extends book
+			class VersionTypedBook extends TypedBook {
+				constructor(title, author, pubdate, typed, version) {
+					// super in this case will be the VersionBook constructor
+					super(title, author, pubdate, typed);
+					this._version = version;
+				}
+				
+				getBook() {
+				   return super.getBook() + " - version: " + this._version;
+				}
+
+				get version() {
+				   return this._version;
+				}
+			}
+
+			// create a TypedBook object
+			var bookT = new TypedBook("Thank You for Being Late", "Thomas Friedman", 2016, "politics");
+			
+			// create a version book
+			var bookV = new VersionBook("Thank You for Being Late", "Thomas Friedman", 2016, "hardcover");
+			
+			// create a version typed book
+			var bookVT = new VersionTypedBook("Thank You for Being Late", "Thomas Friedman", 2016, "politics", "hardcover");
+			console.log(bookVT.getBook());
+			
+			// call the TypedBook getBook method
+			//console.log(bookB.getBook());
+
+			// when we retrieve a property using an ES6 getter,
+			// we just write objectName.propertyName and the getter
+			// will be invoked under the hood
+			console.log(bookT.type);
+			
+			// similarly, when we update a property using an ES6 setter,
+			// we also assign the new value to objectName.propertyName and
+			// the setter will be invoked under the hood
+			bookT.type = "political science";
+			console.log(bookT.type);
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
+

@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<title>Shapes</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// set the size of the canvas
+			// we'll use block scope variable declarations throughout
+			const maxWidth = 500;
+			const maxHeight = 500;
+			
+			// declare the base class (most generic class)
+			// Shape has a string "id", a fill style string
+			// and x, y coordinates
+			class Shape {
+				//constructor declares property set
+				constructor(id, fillStyle, x, y) {
+					this._id = id;
+					this._fillStyle = fillStyle;
+					this._x = x;
+					this._y = y;
+				}
+				// create native getters for the x, y coordinates
+				// and the fill style
+				get id(){
+					return this._id;
+				}
+				get fillStyle(){
+					return this._fillStyle;
+				}
+				get x(){
+					return this._x;
+				}
+				get y() {
+					return this._y;
+				}
+				get style() {
+					return this._fillStyle;
+				}
+			}
+
+			// declare the first extended class
+			// Rectangle is a specific kind of Shape with width and height
+			class Rectangle extends Shape {
+				// constructor declares all properties, including the
+				// super class (Shape) properties
+				constructor (id, fillStyle, x, y, width, height) {
+					super(id, fillStyle, x, y);
+					this._width  = width;
+					this._height = height;
+					
+				}
+				// create native getters and setters for the
+				// width and height
+				set width(width){
+					this._width = width;
+				}
+				
+				get width(){
+					return this._width;
+				}
+				
+				set height(height){
+					this._height = height;
+				}
+				
+				get height(){
+					return this._height;
+				}
+				// log the properties for this shape (rectangle)
+				render(){
+					console.log(super.id);
+					console.log(super.fillStyle, super.x, super.y, this.width, this.height);
+				}
+			}
+			// declare the second extended class
+			// Circle is a specific kind of Shape with x, y centre point and radius
+			class Circle extends Shape {
+				constructor (id, fillStyle, x, y, radius) {
+					super(id, fillStyle, x, y)
+					this._radius = radius;
+				}
+				// native setter and getter for the radius property
+				set radius(radius){
+					this._radius = radius;
+				}
+				
+				get radius(){
+					return this._radius;
+				}
+				// define the render method specifically for this shape (circle)
+				render(){
+					console.log(super.id);
+					console.log(super.fillStyle, super.x, super.y, this.radius);
+				}
+			}
+			
+			function startMeUp() {
+				// create a rectangle object
+				let r1 = new Rectangle("r1", "#ff0000", 10, 10, 50, 50);
+				r1.render();
+				
+				// change the width and height and re-render
+				r1.width = 100;
+				r1.height = 100;
+				r1.render();
+				
+				// create a circle
+				let c1 = new Circle("c1", "rgba(0,0,255,0.5)", 200, 200, 50);
+				c1.render();
+				
+				// change the radius and re-render
+				c1.radius = 100;
+				c1.render();
+			}
+		</script>
+	</head>
+	<body onload="startMeUp();">
+	</body>
+</html>

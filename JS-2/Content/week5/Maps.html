@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<title>Maps</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// create a new map
+			var map1 = new Map();
+
+			// add a string key and a value
+			map1.set("value1", "this is value");
+			
+			// add a numeric key and a value
+			map1.set(3, "another value");
+			
+			// hard to believe but NaN can be a key name
+			map1.set(NaN, "this is allowed");
+
+			// an object such as window can also be a key name
+			map1.set(window, "also allowed");
+			
+			// retrieve the number of entries
+			console.log(map1.size);
+
+			// retrieve values by key
+			console.log(map1.get("value1"));
+			console.log(map1.get(NaN));
+			console.log(map1.get(3));
+			console.log(map1.get(window));
+
+			// iterate the map by key value pairs
+			// uses the for..var (or let).. of.. syntax
+			for (var [key, value] of map1) {
+			  console.log(key + " = " + value);
+			}
+
+			// iterating through keys
+			for (var key of map1.keys()) {
+			  console.log(key);
+			}
+
+			// iterating through values
+			for (var value of map1.values()) {
+			  console.log(value);
+			}
+
+			//call the anonymous function once for each value in the map
+			map1.forEach(function(value) {
+			  console.log(value);
+			});
+
+			// define an iterator for the keys
+			var mapIter = map1.keys();
+
+			// use the next() method to retrieve the next value
+			console.log(mapIter.next().value);
+			console.log(mapIter.next().value);
+			console.log(mapIter.next().value);
+
+			// create a couple of object literals
+			var b = {first: 'apple', second: 'pear'};
+			var c = {first: '5', second: '1'};
+			
+			// create a numeric array literal
+			var d = [1,2,3,4];
+			
+			// create an object alias
+			var e = b;
+			
+			e.third = "grape";
+
+			// redefine map1 as a new map
+			var map1 = new Map();
+
+			// add keys and values using the b, c, d declarations as values
+			map1.set('first', b);
+			map1.set('second', c);
+			map1.set('array', d);
+
+			// retrieve the entries
+			console.log(map1.get("array"));
+			console.log(map1.get("first"));
+			console.log(map1.get("second"));
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<title>Collections</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// create a Set (collection) type
+			var collect1 = new Set();
+			
+			// add 2 values to the collection
+			collect1.add("apple");
+			collect1.add("oranges");
+			
+			// return the number of members in the collection
+			console.log(collect1.size); // 2
+
+			// add a new member and then try to add it again
+			collect1.add("banana");
+			collect1.add("banana"); // ignored
+
+			// get the collection size again
+			console.log(collect1.size); // 3
+
+			// remove (delete) a member
+			collect1.delete("banana");
+
+			// get the size again
+			console.log(collect1.size); // 2
+
+			// determine if particular values are members or not
+			console.log(collect1.has("banana")); // false
+			console.log(collect1.has("apple")); // true
+
+			// the forEach() method calls a provided function once for each element in a collection, in order.
+			// using anonymous function
+			collect1.forEach(function(value) {
+			  console.log(value);
+			});
+			
+			// using a declared function
+			collect1.forEach(loopFor);
+			
+			function loopFor(value) {
+				console.log(value);
+			}
+
+			// convert the collection to an array
+			var arr = [...collect1]; // spread syntax
+			console.log(arr[1]); // oranges 
+
+			// create a new set (collection) from an array literal
+			var collect2 = new Set(['one','two','three']);
+			
+			// get the size of the new collection
+			console.log(collect2.size); // 3
+
+			// same as above but with an array variable
+			var arr2 = ['test','again'];
+			var collect3 = new Set(arr2);
+			console.log(collect3.size); // 2
+
+			// remove all members from the set collection
+			collect1.clear(); 
+			console.log(collect1.size); // 0 
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Testing Let Scope</title>
+		<script language="JavaScript" type="text/JavaScript">
+			// scope of i is global
+			for (var i = 0; i < 5; i++) {
+				console.log("global i (inside loop) = " + i);
+			}
+			
+			console.log("global i (outside loop) = " + i);
+			
+			for (i = 0; i < 5; i++) {
+				console.log("global i (inside loop) = " + i);
+			}
+			
+			for (let j = 0; j < 5; j++) {
+				console.log("block scope j (inside loop) = " + j);
+			}
+			
+			//console.log("BS j (outside loop) = " + j);
+			
+			if (true){
+				let i = "testing let";
+			}
+			
+			if (typeof i !== "undefined") {
+				alert(i);
+			}
+			else {
+				alert("Undefined");
+			}
+			
+			{
+				const key = 'abc123';
+				let points = 50;
+				let winner = false;
+
+				if (points > 40) {
+				   let winner = true;
+				   winner = false;
+				}
+				winner = true;
+				points = 51;
+			}
+
+			{
+				const key = 'abc123';
+				let points = 50;
+				let winner = false;
+
+				//key = 'xyz123';
+
+				const person = {
+					name: 'Wes',
+					age: 28
+				}
+				
+				//person = {
+				//	name: 'Sherlock'
+				//}
+				
+				person.name = 'Sherlock';
+				points = 52;
+			}
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>
