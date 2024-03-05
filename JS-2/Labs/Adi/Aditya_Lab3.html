@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <title>Aditya _ Lab #3</title>
+    <script language="JavaScript" type="text/JavaScript">
+      // *************************************************************
+      // event handler is shared by the pulldown and checkbox controls
+      // to ensure that the only "Ontario" customers are members
+      function testMemberProvince() {
+      	let ref = $gel("selProvinces");
+      	let selectedProv = ref.options[ref.selectedIndex].text;
+
+      	if ($gel("chkMember").checked && selectedProv !== "Ontario") {
+      		alert("Only Ontario Customers are able to be members");
+      		$gel("chkMember").checked = false;
+      	}
+      }
+
+      // ****************************************************
+      // event handler which is attached to the submit button
+      // tests all the text boxes for valid input
+      function submit() {
+      	testEmpty("txtFirst");
+      	testEmpty("txtLast");
+      	testEmpty("txtAddress");
+      	testEmpty("txtCity");
+      	testEmpty("txtPostal");
+      	testEmpty("txtPhone");
+
+      	let dataSet = new Set();
+      	dataSet.add(document.getElementById("txtFirst").value);
+
+      }
+
+      // *********************************************
+      // helper function is used to test each text box
+      // to ensure that something was entered
+      function testEmpty(id) {
+      	if ($gel(id).value === "") {
+      		$gel(id).style.backgroundColor = "pink";
+      	}
+      	else {
+      		$gel(id).style.backgroundColor = "white";
+      	}
+      }
+
+      // *********************************************************************
+      // helper function serves as a "wrapper" around document.getElementById
+      // the only benefit to using this function is to reduce typing elsewhere
+      function $gel(id) {
+      	return document.getElementById(id);
+      }
+    </script>
+  </head>
+  <body>
+    <div>First Name</div>
+    <input
+      type="text"
+      id="txtFirst"
+      maxlength="50"
+      size="50"
+      value="Sherlock"
+    />
+    <br /><br />
+    <div>Last Name</div>
+    <input type="text" id="txtLast" maxlength="50" size="50" value="Holmes" />
+    <br /><br />
+    <div>Address</div>
+    <input
+      type="text"
+      id="txtAddress"
+      maxlength="50"
+      size="50"
+      value="221 B Baker Street"
+    />
+    <br /><br />
+    <div>City</div>
+    <input type="text" id="txtCity" maxlength="40" size="40" value="London" />
+    <br /><br />
+    <div>Province</div>
+    <select id="selProvinces" onchange="testMemberProvince();">
+      <option>British Columbia</option>
+      <option>Alberta</option>
+      <option>Saskatchewan</option>
+      <option>Manitoba</option>
+      <option selected>Ontario</option>
+      <option>Quebec</option>
+      <option>Nova Scotia</option>
+      <option>Prince Edward Island</option>
+      <option>Newfoundland & Labrador</option>
+      <option>Northwest Territories</option>
+    </select>
+    <br /><br />
+    <div>Postal Code</div>
+    <input type="text" id="txtPostal" maxlength="7" size="7" value="N6H 1V6" />
+    <br /><br />
+    <div>Telephone</div>
+    <input
+      type="text"
+      id="txtPhone"
+      maxlength="12"
+      size="12"
+      value="519 555-1212"
+    />
+    <br /><br />
+    <label
+      ><input
+        type="checkbox"
+        id="chkMember"
+        onclick="testMemberProvince();"
+        checked="true"
+      />Is Member?</label
+    ><br />
+    <br /><br />
+    <input type="button" id="btnSubmit" value="Submit" onclick="submit();" />
+  </body>
+  <!-- I decided to go with another script tag after loading all the html to counter some errors! -->
+  <script>
+              // Declaring all the values of the text boxes in global scope using let
+              let firstName = document.getElementById("txtFirst").value;
+    let lastName = document.getElementById("txtLast").value;
+    let address = document.getElementById("txtAddress").value;
+    let city = document.getElementById("txtCity").value;
+    let province = document.getElementById("selProvinces").value;
+    let postal = document.getElementById("txtPostal").value;
+    let telephone = document.getElementById("txtPhone").value;
+    let isMem = document.getElementById("chkMember").checked;
+
+    
+    // For set:
+    let dataSet = new Set();
+    dataSet.add(firstName);
+    dataSet.add(lastName);
+    dataSet.add(address);
+    dataSet.add(city);
+    dataSet.add(province);
+    dataSet.add(postal);
+    dataSet.add(telephone);
+    dataSet.add(isMem);
+
+
+    //For Map:
+    let dataMap = new Map();
+    dataMap.set("txtFirst", firstName);
+    dataMap.set("txtLast", lastName);
+    dataMap.set("txtAddress", address);
+    dataMap.set("txtCity", city);
+    dataMap.set("selProvinces", province);
+    dataMap.set("txtPostal", postal);
+    dataMap.set("txtPhone", telephone);
+    dataMap.set("chkMember", isMem);
+
+    // Displaying in console:
+    function dumpSet(dataSet){
+      dataSet.forEach(function(value){
+        console.log(value);
+      });
+    }
+    dumpSet(dataSet);
+
+
+    function dumpMap(dataMap){
+      for(let[key, value] of dataMap){
+        console.log(key + " = " + value);
+      }
+    }
+    dumpMap(dataMap);
+      
+
+  </script>
+</html>

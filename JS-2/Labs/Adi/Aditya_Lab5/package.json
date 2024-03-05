@@ -1,0 +1,21 @@
+{
+  "name": "week-10",
+  "version": "1.0.0",
+  "description": "Using npm init",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "build": "webpack"
+  },
+  "author": "Ofc Adi",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
