@@ -1,0 +1,96 @@
+ body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr; /* Cambia a una sola columna */
+  }
+}
+
+label {
+    margin-top: 4px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+select {
+  padding: 10px;
+  margin: 5px;
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+input {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.player {
+  width:100%;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.movebuttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#message {
+  margin-top: 10px;
+  font-weight: bold;
+  color: red;
+}
+
+#btnPrevious,
+#btnNext {
+  background-color: #2ecc71;
+}
+
+#btnPrevious:hover,
+#btnNext:hover {
+  background-color: #27ae60;
+}
+
+#winner {
+  margin-top: 5px;
+  font-weight: bold;
+  display: inline-block;
+  color:#2ecc71
+}
+
+

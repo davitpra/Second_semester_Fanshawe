@@ -1,0 +1,274 @@
+<html>
+  <head>
+    <title>MLB Demo Asynch</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script language="JavaScript" type="text/JavaScript">
+
+      const ISOK = 200;
+      let request = new XMLHttpRequest();
+      let game = 0;
+
+      // error handler
+      function errorHandler(error, message) {
+        console.log(`Error ${request.status}: ${request.statusText}`, error);
+        document.getElementById("homeTeamName").value = 'No Game Found';
+        document. getElementById("awayTeamName").value = 'No Game Found';
+        document.getElementById("venue").value = 'No Game Found';
+        document.getElementById("winningScore").value = 'No Game Found';
+        document.getElementById("losingScore").value = 'No Game Found';
+        document.getElementById("winner").innerHTML = "";
+        document.getElementById("message").innerHTML = message;
+      }
+
+      // get the json data
+      function getJSONAsync(url, game) {
+        // use an anonymous function as the event handler
+        request.onload = function () {
+          // check the status
+          if (request.status === ISOK) {
+            // if all is ok make parse the data
+            try {
+              //change to json object
+              let jsObject = JSON.parse(request.responseText);
+              //playeres
+              let homePlayer =jsObject.dates[0].games[game].teams.home
+              let awayPlayer = jsObject.dates[0].games[game].teams.away
+
+              //venue
+              let venue = jsObject.dates[0].games[game].venue.name
+
+              //team names
+              let homeName = homePlayer.team.name
+              let awayName = awayPlayer.team.name
+
+              //winner
+              let isHomeWinner = homePlayer.score > awayPlayer.score ? true : false
+
+              //scores
+              let winningScore;
+              let losingScore;
+              let winner;
+              if (isHomeWinner){
+                winningScore = homePlayer.score
+                losingScore =  awayPlayer.score
+                winner = 'Home Team Wins'
+              } else {
+                winningScore = awayPlayer.score
+                losingScore =  homePlayer.score
+                winner = 'Away Team Wins'
+              }
+              //set the values
+              document.getElementById("homeTeamName").value = homeName;
+              document. getElementById("awayTeamName").value = awayName;
+              document.getElementById("venue").value = venue;
+              document.getElementById("winningScore").value = winningScore;
+              document.getElementById("losingScore").value = losingScore;
+              document.getElementById("winner").innerHTML = winner;
+              document.getElementById("message").innerHTML = '';
+
+              //get the total games
+              let totalGames = jsObject.dates[0].games.length;
+
+              //disable the buttons if the game is the last
+              if (game >= totalGames - 1) {
+                document.getElementById("btnNext").disabled = true;
+              } else {
+                document.getElementById("btnNext").disabled = false;
+              }
+
+            } catch (error) {
+              //if there is an error
+              let message = "No game found";
+              errorHandler(error, message);
+            }
+          } else {
+            //if there is an error
+            let message = "error server";
+            let error = request;
+            errorHandler(error, message);
+          }
+        }
+        request.open("GET", url, true);
+        request.send();
+      }
+
+      // make the request to the server to get the data for the game date
+      function getDataAsynch(game) {
+        // get the date
+      	let year = document.getElementById("year").value;
+      	let month = document.getElementById("month").value;
+      	let day = document.getElementById("day").value;
+
+        //url for the game date
+        let tempURL = `http://statsapi.mlb.com/api/v1/schedule/games/?sportId=1&date=${month}/${day}/${year}`;
+        getJSONAsync(tempURL, game);
+      }
+
+      // get the retrieve the data
+      function retrieve () {
+        game = 0;
+        getDataAsynch(game);
+      }
+
+      // get the json data for the next or previous game date
+      function move(count) {
+
+        game += Number(count);
+
+        //if the game is less than 0, set it to 0
+        if (game >= 0){
+          getDataAsynch(game);
+        } else {
+          game = 0;
+          getDataAsynch(game);
+        }
+      }
+
+      // save the data to local storage
+      function saveData() {
+        // get the date
+      	let year = document.getElementById("year").value;
+      	let month = document.getElementById("month").value;
+      	let day = document.getElementById("day").value;
+        //save the data
+        let dataSaved = {
+          year,
+          month,
+          day,
+          game
+        }
+        //save the data to local storage
+        localStorage.setItem("game", JSON.stringify(dataSaved));
+      }
+
+      // load the data from local storage
+      function loadData() {
+        //load the data
+        let dataSaved = localStorage.getItem("game");
+        //if the data is saved, parse it and set the values
+        if (dataSaved) {
+          dataSaved = JSON.parse(dataSaved);
+          document.getElementById("year").value = dataSaved.year;
+          document.getElementById("month").value = dataSaved.month;
+          document.getElementById("day").value = dataSaved.day;
+          game = dataSaved.game;
+          let tempURL = `http://statsapi.mlb.com/api/v1/schedule/games/?sportId=1&date=${dataSaved.month}/${dataSaved.day}/${dataSaved.year}`;
+          getJSONAsync(tempURL, game);
+        }
+      }
+
+      // clear reset the local storage and the game
+      function clear () {
+        console.log("Data Erased");
+        localStorage.removeItem("game");
+        game = 0;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- YEAR -->
+      <label for="year">Year:</label>
+      <select name="year" id="year">
+        <option value="2020">2020</option>
+        <option value="2021" selected>2021</option>
+        <option value="2022">2022</option>
+      </select>
+      <br />
+      <!-- MONTH -->
+      <label for="month">Month:</label>
+      <select name="month" id="month">
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06" selected>06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      <br />
+      <!-- DAY -->
+      <label for="day">Day:</label>
+      <select name="day" id="day">
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13" selected>13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+      </select>
+      <br />
+      <!-- Submit -->
+      <button type="button" id="btnRetrieve" onclick="retrieve();">
+        Retrieve
+      </button>
+    </div>
+
+    <!-- inputs for the game data -->
+    <div class="resultContainer">
+      <div class="player">
+        <label for="homeTeamName">Home Team Name:</label>
+        <input type="text" id="homeTeamName" name="homeTeamName" />
+        <br />
+        <label for="awayTeamName">Away Team Name:</label>
+        <input type="text" id="awayTeamName" name="awayTeamName" />
+        <div id="winner"></div>
+      </div>
+      <br />
+      <label for="winningScore">Winning Score:</label>
+      <input type="text" id="winningScore" name="winningScore" />
+      <br />
+      <label for="losingScore">Losing Score:</label>
+      <input type="text" id="losingScore" name="losingScore" />
+      <br />
+      <label for="Venue">Venue:</label>
+      <input type="text" id="venue" name="venue" />
+      <br />
+
+      <!-- message -->
+      <div id="message"></div>
+
+      <!-- buttons for next and previous game -->
+      <div class="movebuttons">
+        <button id="btnPrevious" onclick="move(-1);">Previous Game</button>
+        <button id="btnNext" onclick="move(1);">Next Game</button>
+      </div>
+      <!-- button to save the changes -->
+      <button id="btnSave" onclick="saveData();">Save</button>
+      <!-- button to load the changes -->
+      <button id="btnLoad" onclick="loadData();">Load</button>
+      <!-- button to clear data saved the changes -->
+      <button id="btnClear" onclick="clear()">Clear Data</button>
+    </div>
+  </body>
+</html>
