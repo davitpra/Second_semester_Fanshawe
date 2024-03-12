@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>Closure Example 04</title>
+		<script language="JavaScript" type="text/JavaScript">
+			let myObject = function () {
+				let value = 0;
+
+				return {
+					increment: function (inc) {
+						if (typeof inc === 'number') {
+							value += inc;
+						}
+						else {
+							value++;
+						}
+					},
+					getValue: function () {
+						return value;
+					}
+				}
+			}(); // IIFE (Immediately Invoked Function Expression)
+			
+			myObject.increment();
+			console.log(myObject.getValue());
+			myObject.increment(5);
+			console.log(myObject.getValue());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

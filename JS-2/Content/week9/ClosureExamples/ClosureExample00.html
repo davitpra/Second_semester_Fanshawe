@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>Closure Example 00</title>
+		<script language="JavaScript" type="text/JavaScript">
+			function sayHello(name) {
+				let text = "Hello " + name; // local variable
+				let sayAlert = function() {
+					alert(text); 
+				}
+				return sayAlert;
+			}
+			let say = sayHello("Jimbo");
+			say();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

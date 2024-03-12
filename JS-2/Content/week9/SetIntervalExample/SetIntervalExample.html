@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>setInterval example</title>
+    <script language="JavaScript" type="text/JavaScript">
+      var timerNum = 0;
+      var count = 0;
+      function startMeUp() {
+      	timerNum = setInterval(keepCalling, 1000);
+      }
+
+      function keepCalling() {
+      	document.write("Hello");
+      	count++;
+
+      	if (count > 5) {
+      		clearInterval(timerNum);
+      	}
+      }
+    </script>
+  </head>
+  <body onload="startMeUp();"></body>
+</html>

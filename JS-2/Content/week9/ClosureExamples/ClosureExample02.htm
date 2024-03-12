@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Closure Example 2</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function createFunctions(){
+                var result = [];
+                
+                for (var i = 0; i < 10; i++){
+                    result[i] = function(num){
+                        return function(){
+                            return num;
+                        };
+                    }(i); // IIFE - Immediately Invoked Function Expression
+                }
+                
+                return result;
+            }
+            
+            var funcs = createFunctions();
+            
+            for (var i = 0; i < funcs.length; i++){
+                document.write(funcs[i]() + "<br />");
+            }
+        </script>
+     
+    </body>
+</html>
