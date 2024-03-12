@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>Lab 4</title>
+		<script language="JavaScript" type="text/JavaScript">
+		
+		let timers = [];
+		
+		let log = (function (outputFunc) {
+			let counter = 0;
+			let callerLog = [];
+			let dateTime = [];
+			
+			// return inner anonymous function
+			return function(caller) {
+				// replace the next line with your new code
+				console.log(caller);
+			}
+			
+		})(printFunc); //IIFE
+		
+		function printFunc(output) {
+			document.write(output + "<br>");
+		}
+		
+		function startMeUp() {
+			// add each of the timer references to the timers array
+			// as part of invoking the log function following each interval
+			timers.push(setInterval("log('Timer1')", 1000));
+			timers.push(setInterval("log('Timer2')", 1200));
+			timers.push(setInterval("log('Timer3')", 1700));
+		}
+		
+		</script>
+	</head>
+	<body onload="startMeUp();">
+	
+	</body>
+</html>
